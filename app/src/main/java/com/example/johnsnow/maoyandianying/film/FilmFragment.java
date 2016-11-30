@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.johnsnow.maoyandianying.Base.BaseFragment;
 import com.example.johnsnow.maoyandianying.R;
@@ -23,6 +24,18 @@ public class FilmFragment extends BaseFragment implements View.OnClickListener{
     ViewPager viewPager;
     ArrayList<Fragment> fragmentList;
     RelativeLayout search;
+    private boolean hadIntercept;
+
+    @Override
+    public boolean onBackPressed() {
+        if(hadIntercept){
+            return false;
+        }else{
+            Toast.makeText(getActivity(), "Click From MyFragment", Toast.LENGTH_SHORT).show();
+            hadIntercept = true;
+            return true;
+        }
+    }
 
     @Override
     public View initView() {

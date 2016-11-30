@@ -1,6 +1,5 @@
 package com.example.johnsnow.maoyandianying.film.fragment;
 
-import android.animation.Animator;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -18,6 +16,9 @@ import android.widget.ImageView;
 
 import com.example.johnsnow.maoyandianying.R;
 import com.example.johnsnow.maoyandianying.utils.PdUtil;
+
+import io.codetail.animation.SupportAnimator;
+import io.codetail.animation.ViewAnimationUtils;
 
 public class FragmentRevealExample extends Fragment implements View.OnClickListener{
 
@@ -51,15 +52,14 @@ public class FragmentRevealExample extends Fragment implements View.OnClickListe
                 centerX = img_search.getLeft()+img_search.getWidth()/2;
                 centerY = img_search.getTop()+img_search.getHeight()/2;
 
-                Animator mRevealAnimator = ViewAnimationUtils.createCircularReveal(edit_lay, centerX, centerY, 20, PdUtil.hypo(edit_lay.getWidth(), edit_lay.getHeight()));
-                mRevealAnimator.addListener(new Animator.AnimatorListener() {
+                SupportAnimator mRevealAnimator = ViewAnimationUtils.createCircularReveal(edit_lay, centerX, centerY, 20, PdUtil.hypo(edit_lay.getWidth(), edit_lay.getHeight()));
+                mRevealAnimator.addListener(new SupportAnimator.AnimatorListener() {
                     @Override
-                    public void onAnimationStart(Animator animation) {
+                    public void onAnimationStart() {
                         edit_lay.setVisibility(View.VISIBLE);
                     }
-
                     @Override
-                    public void onAnimationEnd(Animator animation) {
+                    public void onAnimationEnd() {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -72,17 +72,12 @@ public class FragmentRevealExample extends Fragment implements View.OnClickListe
                             }
                         }, 100);
                     }
-
                     @Override
-                    public void onAnimationCancel(Animator animation) {
-
+                    public void onAnimationCancel() {
                     }
-
                     @Override
-                    public void onAnimationRepeat(Animator animation) {
-
+                    public void onAnimationRepeat() {
                     }
-
                 });
                 mRevealAnimator.setDuration(200);
                 mRevealAnimator.setStartDelay(100);
@@ -96,31 +91,26 @@ public class FragmentRevealExample extends Fragment implements View.OnClickListe
     }
 
     public boolean onBackPressed() {
-        Animator mRevealAnimator = ViewAnimationUtils.createCircularReveal(content, centerX, centerY, 20, PdUtil.hypo(content.getWidth(), content.getHeight()));
+        SupportAnimator mRevealAnimator = ViewAnimationUtils.createCircularReveal(content, centerX, centerY, 20, PdUtil.hypo(content.getWidth(), content.getHeight()));
+        mRevealAnimator = mRevealAnimator.reverse();
         if (mRevealAnimator==null) return false;
-        mRevealAnimator.addListener(new Animator.AnimatorListener() {
+        mRevealAnimator.addListener(new SupportAnimator.AnimatorListener() {
             @Override
-            public void onAnimationStart(Animator animation) {
+            public void onAnimationStart() {
                 content.setVisibility(View.VISIBLE);
             }
-
             @Override
-            public void onAnimationEnd(Animator animation) {
+            public void onAnimationEnd() {
                 content.setVisibility(View.INVISIBLE);
                 if (getActivity()!=null)
                     getActivity().getSupportFragmentManager().popBackStack();
             }
-
             @Override
-            public void onAnimationCancel(Animator animation) {
-
+            public void onAnimationCancel() {
             }
-
             @Override
-            public void onAnimationRepeat(Animator animation) {
-
+            public void onAnimationRepeat() {
             }
-
         });
         mRevealAnimator.setDuration(200);
         mRevealAnimator.setStartDelay(100);
