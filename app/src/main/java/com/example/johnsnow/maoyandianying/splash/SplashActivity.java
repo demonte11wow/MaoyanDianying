@@ -1,5 +1,6 @@
 package com.example.johnsnow.maoyandianying.splash;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,12 +11,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.example.johnsnow.maoyandianying.MainActivity;
 import com.example.johnsnow.maoyandianying.R;
 import com.example.johnsnow.maoyandianying.global.MyConstants;
 import com.example.johnsnow.maoyandianying.splash.bean.SplashBean;
@@ -25,6 +28,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.Call;
 
 public class SplashActivity extends AppCompatActivity {
@@ -34,13 +38,34 @@ public class SplashActivity extends AppCompatActivity {
     @Bind(R.id.server_splash)
     ImageView server_splash;
 
+    @Bind(R.id.skip_btn)
+    Button skip_btn;
+    int lastSecond = 5;
+    boolean isStart = false;
+
+
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
+
             super.handleMessage(msg);
-            getSplashImageFromServer();
+            switch (msg.what){
+                case 0:
+                    getSplashImageFromServer();
+                    break;
+                case 1:
+                    startMainActivity();
+                    break;
+                case 2:
+                    if(lastSecond > 0){
+                        skip_btn.setText("跳过:" + lastSecond-- + "s");
+                        sendEmptyMessageDelayed(2,1000);
+                    }
+                    break;
+            }
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +96,7 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         public void onError(Call call, Exception e, int id) {
             Log.e("TAG", "联网失败" + e.getMessage());
+            startMainActivity();
         }
 
         @Override
@@ -78,10 +104,7 @@ public class SplashActivity extends AppCompatActivity {
 
             switch (id) {
                 case 100:
-                    Log.e("suc","suc");
-                    Log.e("i am here1","i am here1");
                     if (response != null) {
-                        Log.e("i am here2","i am here2");
                         processData(response);
                     }
                     break;
@@ -96,9 +119,7 @@ public class SplashActivity extends AppCompatActivity {
     private void processData(String response) {
         Gson gson = new Gson();
         SplashBean sBean = gson.fromJson(response, SplashBean.class);
-        Log.e("suc2",sBean.toString());
         String splashUrl = sBean.getPosters().get(0).getPic();
-        Log.e("suc2",splashUrl);
         Glide
                 .with(this)
                 .load(splashUrl)
@@ -110,11 +131,37 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
             //使用bitmap做一些事,如
-            server_splash.setImageBitmap(resource);
+            if(null != resource){
+                server_splash.setImageBitmap(resource);
+            }
             AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);//0:完全透明 1：完全不透明
-            alphaAnimation.setDuration(3000);
+            alphaAnimation.setDuration(1000);
             alphaAnimation.setInterpolator(new AccelerateInterpolator());//设置动画的变化率
+            handler.sendEmptyMessageDelayed(1,6000);
+            handler.sendEmptyMessageDelayed(2,1000);
             server_splash.startAnimation(alphaAnimation);
         }
     };
+
+
+    @OnClick(R.id.skip_btn)
+    void skip_btn_click() {
+        startMainActivity();
+    }
+
+    private void startMainActivity() {
+        if(!isStart){
+            isStart = true;
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+            //关闭当前页面
+            finish();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
+    }
 }

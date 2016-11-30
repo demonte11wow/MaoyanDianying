@@ -32,12 +32,14 @@
 
 
     <Button
+        android:id="@+id/skip_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:alpha="0.5"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:textStyle="bold"
         android:text="跳过"
         />
 </RelativeLayout>

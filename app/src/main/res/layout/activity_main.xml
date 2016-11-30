@@ -1,12 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.johnsnow.maoyandianying.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <include layout="@layout/maoyan_title"/>
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <RadioGroup
+        android:padding="5dp"
+        android:id="@+id/rg_main"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+        android:orientation="horizontal"
+        >
+        <RadioButton
+            android:id="@+id/rb_film"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/bottom_style_tab"
+            android:drawableTop="@drawable/rb_local_dianying_drawable"
+            android:text="电影"/>
+        <RadioButton
+            android:id="@+id/rb_cinema"
+            style="@style/bottom_style_tab"
+            android:drawableTop="@drawable/rb_local_yingyuan_drawable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="影院"/>
+        <RadioButton
+            android:id="@+id/rb_find"
+            style="@style/bottom_style_tab"
+            android:drawableTop="@drawable/rb_net_faxian_drawable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发现"/>
+        <RadioButton
+            android:id="@+id/rb_mycenter"
+            style="@style/bottom_style_tab"
+            android:drawableTop="@drawable/rb_net_wode_drawable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的"/>
+
+    </RadioGroup>
+
+</LinearLayout>
