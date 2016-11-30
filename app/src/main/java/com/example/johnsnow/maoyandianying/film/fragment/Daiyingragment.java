@@ -8,10 +8,10 @@ import com.example.johnsnow.maoyandianying.R;
 /**
  * Created by JohnSnow on 2016/11/30.
  */
-public class ReyingFragment extends BaseFragment {
+public class Daiyingragment extends BaseFragment {
     @Override
     public View initView() {
-        View view = View.inflate(getContext(), R.layout.fragment_reying,null);
+        View view = View.inflate(getContext(), R.layout.fragment_daiying,null);
         return view;
     }
 }

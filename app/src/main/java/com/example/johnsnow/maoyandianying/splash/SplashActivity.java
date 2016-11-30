@@ -7,10 +7,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -120,6 +123,9 @@ public class SplashActivity extends AppCompatActivity {
         Gson gson = new Gson();
         SplashBean sBean = gson.fromJson(response, SplashBean.class);
         String splashUrl = sBean.getPosters().get(0).getPic();
+        if(SplashActivity.this.isDestroyed()){
+            return;
+        }
         Glide
                 .with(this)
                 .load(splashUrl)
@@ -163,5 +169,23 @@ public class SplashActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
+        Glide.clear(target);
+        unbindDrawables(server_splash);
+    }
+
+    private void unbindDrawables(View view)
+    {
+        if (view.getBackground() != null)
+        {
+            view.getBackground().setCallback(null);
+        }
+        if (view instanceof ViewGroup && !(view instanceof AdapterView))
+        {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++)
+            {
+                unbindDrawables(((ViewGroup) view).getChildAt(i));
+            }
+            ((ViewGroup) view).removeAllViews();
+        }
     }
 }

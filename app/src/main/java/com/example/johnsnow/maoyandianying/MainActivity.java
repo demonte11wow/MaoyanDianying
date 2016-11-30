@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 
 import com.example.johnsnow.maoyandianying.Base.BaseFragment;
 import com.example.johnsnow.maoyandianying.film.FilmFragment;
+import com.example.johnsnow.maoyandianying.film.fragment.FragmentRevealExample;
 import com.example.johnsnow.maoyandianying.find.FindFragment;
 import com.example.johnsnow.maoyandianying.mycenter.MyCenterFragment;
 import com.example.johnsnow.maoyandianying.yingyuan.CinemaFragment;
@@ -109,6 +110,16 @@ public class MainActivity extends AppCompatActivity {
                     transaction.show(toFragment).commit();
                 }
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentRevealExample fragment = (FragmentRevealExample)getSupportFragmentManager().findFragmentByTag("fragment_my");
+        if(fragment!=null) {
+            fragment.onBackPressed();
+        }else {
+            onBackPressed();
         }
     }
 
