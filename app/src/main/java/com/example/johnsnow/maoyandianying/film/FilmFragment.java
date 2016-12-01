@@ -8,9 +8,9 @@ import android.widget.Toast;
 
 import com.example.johnsnow.maoyandianying.Base.BaseFragment;
 import com.example.johnsnow.maoyandianying.R;
-import com.example.johnsnow.maoyandianying.film.fragment.Daiyingragment;
+import com.example.johnsnow.maoyandianying.film.fragment.HotFragment;
 import com.example.johnsnow.maoyandianying.film.fragment.FragmentRevealExample;
-import com.example.johnsnow.maoyandianying.film.fragment.ReyingFragment;
+import com.example.johnsnow.maoyandianying.film.fragment.SoonComeFragment;
 import com.example.johnsnow.maoyandianying.film.fragment.ZhaopianFragment;
 import com.flyco.tablayout.SlidingTabLayout;
 
@@ -50,15 +50,15 @@ public class FilmFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public void initData() {
         super.initData();
-        String[] titles = {"待映","热映","找片"};
+        String[] titles = {"热映","待映","找片"};
         initFragment();
         slidingTabLayout.setViewPager(viewPager,titles,getActivity(),fragmentList);
     }
 
     private void initFragment() {
         fragmentList = new ArrayList<>();
-        Daiyingragment dai = new Daiyingragment();
-        ReyingFragment re = new ReyingFragment();
+        HotFragment dai = new HotFragment();
+        SoonComeFragment re = new SoonComeFragment();
         ZhaopianFragment zh = new ZhaopianFragment();
         fragmentList.add(dai);
         fragmentList.add(re);

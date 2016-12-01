@@ -2,12 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.johnsnow.maoyandianying.film.fragment.ReyingFragment">
+    tools:context="com.example.johnsnow.maoyandianying.film.fragment.DaiyingFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/reying_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="reying" />
+        android:layout_height="match_parent">
+    </ListView>
 
 </FrameLayout>
