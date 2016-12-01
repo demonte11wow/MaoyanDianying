@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -32,16 +33,17 @@ public class HotAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return hotBeanlist.size();
+        return hotBeanlist != null ? hotBeanlist.size() : 0;
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return hotBeanlist != null ? hotBeanlist.get(position) : null;
     }
 
     @Override
     public long getItemId(int position) {
+
         return position;
     }
 
@@ -49,6 +51,7 @@ public class HotAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         Drawable drawable_yushou =mContext.getDrawable(R.drawable.text_yushou_shape);
+        Drawable drawable_goupiao =mContext.getDrawable(R.drawable.text_goupiao_shape);
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.hot_list_item, null);
@@ -60,6 +63,7 @@ public class HotAdapter extends BaseAdapter {
             viewHolder.film_scm = (TextView) convertView.findViewById(R.id.film_scm);
             viewHolder.film_shownfo = (TextView) convertView.findViewById(R.id.film_shownfo);
             viewHolder.film_submit = (TextView) convertView.findViewById(R.id.film_submit);
+            viewHolder.ll_bottom = (LinearLayout) convertView.findViewById(R.id.ll_bottom);
             //设置tag
             convertView.setTag(viewHolder);
         } else {
@@ -67,6 +71,7 @@ public class HotAdapter extends BaseAdapter {
         }
         //根据位置得到对应的数据
         HotBean.DataBean.MoviesBean filmItem = hotBeanlist.get(position);
+
         viewHolder.film_title.setText(filmItem.getNm());
         viewHolder.film_score_profession.setText(""+6.6);
         viewHolder.film_scm.setText(filmItem.getScm());
@@ -79,11 +84,20 @@ public class HotAdapter extends BaseAdapter {
 
         if(filmItem.getPreSale() == 0){
             viewHolder.film_score_audience.setText(""+filmItem.getSc());
+            viewHolder.film_submit.setBackground(drawable_goupiao);
+            viewHolder.film_submit.setText("购票");
+            viewHolder.film_submit.setTextColor(Color.parseColor("#ffcb7f"));
         } else {
             viewHolder.film_submit.setText("预售");
-            viewHolder.film_submit.setTextColor(Color.BLUE);
+            viewHolder.film_submit.setTextColor(Color.parseColor("#ff00ddff"));
             viewHolder.film_submit.setBackground(drawable_yushou);
             viewHolder.film_score_audience.setText("暂无");
+        }
+
+        if(position != 0){
+            viewHolder.ll_bottom.setVisibility(View.GONE);
+        } else {
+            viewHolder.ll_bottom.setVisibility(View.VISIBLE);
         }
 
         return convertView;
@@ -97,5 +111,6 @@ public class HotAdapter extends BaseAdapter {
         TextView film_scm;
         TextView film_shownfo;
         TextView film_submit;
+        LinearLayout ll_bottom;
     }
 }

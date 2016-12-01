@@ -88,9 +88,8 @@ public class HotFragment extends BaseFragment {
                     if (response != null) {
                         processData(response);
                         adapter = new HotAdapter(mContext,hotBean.getData().getMovies());
-                        reyingList.setAdapter(adapter);
                         reyingList.addHeaderView(bannerView);
-                        adapter.notifyDataSetChanged();
+                        reyingList.setAdapter(adapter);
                     }
                     break;
                 case 101:
