@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.example.johnsnow.maoyandianying.Base.BaseFragment;
 import com.example.johnsnow.maoyandianying.R;
-import com.example.johnsnow.maoyandianying.film.adapter.AnimalsHeadersAdapter;
+import com.example.johnsnow.maoyandianying.film.adapter.ComSoonHeadersAdapter;
 import com.example.johnsnow.maoyandianying.film.adapter.DividerDecoration;
 import com.example.johnsnow.maoyandianying.film.bean.ComeSoonBean;
 import com.example.johnsnow.maoyandianying.global.MyConstants;
@@ -31,9 +31,10 @@ public class SoonComeFragment extends BaseFragment {
 
     RecyclerView recyclerView;
     ComeSoonBean csBean;
-    AnimalsHeadersAdapter adapter;
+    ComSoonHeadersAdapter adapter;
     private List<ComeSoonBean.DataBean.ComingBean> csList;
     private List<String> titles;
+    private List<String> mDetailTitles;
 
     @Override
     public View initView() {
@@ -80,10 +81,12 @@ public class SoonComeFragment extends BaseFragment {
     private void initStickHeaderRecyleView() {
         csList = csBean.getData().getComing();
         titles = new ArrayList<>();
-        adapter = new AnimalsHeadersAdapter(mContext,csList,titles);
+        mDetailTitles = new ArrayList<>();
         for(int i = 0; i < csList.size();i++){
             titles.add(csList.get(i).getRt());
+            mDetailTitles.add(csList.get(i).getComingTitle());
         }
+        adapter = new ComSoonHeadersAdapter(mContext,csList,titles,mDetailTitles);
         adapter.addAll(titles);
 
         recyclerView.setAdapter(adapter);

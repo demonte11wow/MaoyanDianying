@@ -10,11 +10,11 @@ import java.util.Collection;
 /**
  * Adapter holding a list of animal names of type String. Note that each item must be unique.
  */
-public abstract class AnimalsAdapter<VH extends RecyclerView.ViewHolder>
+public abstract class BaseHeadAdapter<VH extends RecyclerView.ViewHolder>
     extends RecyclerView.Adapter<VH> {
   private ArrayList<String> items = new ArrayList<String>();
 
-  public AnimalsAdapter() {
+  public BaseHeadAdapter() {
     setHasStableIds(true);
   }
 

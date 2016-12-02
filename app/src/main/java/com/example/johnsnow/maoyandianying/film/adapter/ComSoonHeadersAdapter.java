@@ -20,19 +20,21 @@ import java.util.List;
 /**
  * Created by JohnSnow on 2016/12/2.
  */
-public class AnimalsHeadersAdapter extends AnimalsAdapter<RecyclerView.ViewHolder>
+public class ComSoonHeadersAdapter extends BaseHeadAdapter<RecyclerView.ViewHolder>
         implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private final LayoutInflater mLayoutInflater;
     private List<ComeSoonBean.DataBean.ComingBean> csList;
     private List<String> titles;
+    private List<String> mDetailTitles;
 
-    public AnimalsHeadersAdapter(Context mContext, List<ComeSoonBean.DataBean.ComingBean> csList, List<String> titles) {
+    public ComSoonHeadersAdapter(Context mContext, List<ComeSoonBean.DataBean.ComingBean> csList, List<String> titles,List<String> mDetailTitles) {
         this.mContext = mContext;
 //        this.resultBean = resultBean;
         this.csList = csList;
         this.titles = titles;
+        this.mDetailTitles = mDetailTitles;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
 
@@ -70,7 +72,7 @@ public class AnimalsHeadersAdapter extends AnimalsAdapter<RecyclerView.ViewHolde
     @Override
     public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
         TextView textView = (TextView) holder.itemView;
-        textView.setText(titles.get(position));
+        textView.setText(mDetailTitles.get(position));
         holder.itemView.setBackgroundColor(getRandomColor());
     }
 
