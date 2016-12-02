@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.example.johnsnow.maoyandianying.R;
 import com.example.johnsnow.maoyandianying.film.bean.ComeSoonBean;
+import com.example.johnsnow.maoyandianying.film.bean.Hor1Bean;
+import com.example.johnsnow.maoyandianying.film.bean.Hor2Bean;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
 import java.security.SecureRandom;
@@ -32,13 +34,19 @@ public class ComSoonHeadersAdapter extends BaseHeadAdapter<RecyclerView.ViewHold
     public static final int HORIZANTAL1 = 0;
     public static final int HORIZANTAL2 = 1;
     public static final int ITEM_TYPE_CONTENT = 2;
+    private List<Hor1Bean.DataBean> hoList1;
+    private List<Hor2Bean.DataBean.ComingBean> hoList2;
 
-    public ComSoonHeadersAdapter(Context mContext, List<ComeSoonBean.DataBean.ComingBean> csList, List<String> titles, List<String> mDetailTitles) {
+
+    public ComSoonHeadersAdapter(Context mContext, List<ComeSoonBean.DataBean.ComingBean> csList,
+                                 List<String> titles, List<String> mDetailTitles,List<Hor1Bean.DataBean> hoList1,List<Hor2Bean.DataBean.ComingBean> hoList2) {
         this.mContext = mContext;
 //        this.resultBean = resultBean;
         this.csList = csList;
         this.titles = titles;
         this.mDetailTitles = mDetailTitles;
+        this.hoList1 = hoList1;
+        this.hoList2 = hoList2;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
 
@@ -67,9 +75,9 @@ public class ComSoonHeadersAdapter extends BaseHeadAdapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == HORIZANTAL1) {
-            return new HorHolder1(mLayoutInflater.inflate(R.layout.cs_recyle1, null), mContext);
+            return new HorHolder1(mLayoutInflater.inflate(R.layout.cs_recyle1, null), mContext, hoList1);
         } else if (viewType == HORIZANTAL2) {
-            return new HorHolder2(mLayoutInflater.inflate(R.layout.cs_recyle1, null), mContext);
+            return new HorHolder2(mLayoutInflater.inflate(R.layout.cs_recyle2, null), mContext, hoList2);
         }
         View view = mLayoutInflater.inflate(R.layout.view_item, parent, false);
         return new filmCsViewHolder(view);
@@ -86,7 +94,6 @@ public class ComSoonHeadersAdapter extends BaseHeadAdapter<RecyclerView.ViewHold
             bannerViewHolder.setData();
         }
     }
-
 
     @Override
     public long getHeaderId(int position) {
@@ -159,17 +166,19 @@ public class ComSoonHeadersAdapter extends BaseHeadAdapter<RecyclerView.ViewHold
     private class HorHolder1 extends RecyclerView.ViewHolder {
         private RecyclerView recyclerView;
         public Context mContext;
+        private List<Hor1Bean.DataBean> hoList1;
 
-        public HorHolder1(View inflate, Context mContext) {
+        public HorHolder1(View inflate, Context mContext, List<Hor1Bean.DataBean> hoList1) {
             super(inflate);
             recyclerView = (RecyclerView) itemView.findViewById(R.id.recy_cs1);
+            this.hoList1 = hoList1;
             this.mContext = mContext;
         }
 
         public void setData() {
             //设置RecyclerView
             recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-            HorViewAdapter1 adapter = new HorViewAdapter1(mContext);
+            HorViewAdapter1 adapter = new HorViewAdapter1(mContext,hoList1);
             recyclerView.setAdapter(adapter);
         }
     }
@@ -177,17 +186,19 @@ public class ComSoonHeadersAdapter extends BaseHeadAdapter<RecyclerView.ViewHold
     private class HorHolder2 extends RecyclerView.ViewHolder {
         private RecyclerView recyclerView;
         public Context mContext;
+        private List<Hor2Bean.DataBean.ComingBean> hoList2;
 
-        public HorHolder2(View inflate, Context mContext) {
+        public HorHolder2(View inflate, Context mContext, List<Hor2Bean.DataBean.ComingBean> hoList2) {
             super(inflate);
-            recyclerView = (RecyclerView) itemView.findViewById(R.id.recy_cs1);
+            recyclerView = (RecyclerView) itemView.findViewById(R.id.recy_cs2);
+            this.hoList2 = hoList2;
             this.mContext = mContext;
         }
 
         public void setData() {
             //设置RecyclerView
             recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-            HorViewAdapter2 adapter = new HorViewAdapter2(mContext);
+            HorViewAdapter2 adapter = new HorViewAdapter2(mContext,hoList2);
             recyclerView.setAdapter(adapter);
         }
     }
