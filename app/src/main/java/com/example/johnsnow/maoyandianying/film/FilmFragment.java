@@ -12,7 +12,7 @@ import com.example.johnsnow.maoyandianying.R;
 import com.example.johnsnow.maoyandianying.film.fragment.FragmentRevealExample;
 import com.example.johnsnow.maoyandianying.film.fragment.HotFragment;
 import com.example.johnsnow.maoyandianying.film.fragment.SoonComeFragment;
-import com.example.johnsnow.maoyandianying.film.fragment.ZhaopianFragment;
+import com.example.johnsnow.maoyandianying.film.fragment.FindResouceFragment;
 import com.flyco.tablayout.SlidingTabLayout;
 
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class FilmFragment extends BaseFragment implements View.OnClickListener{
         fragmentList = new ArrayList<>();
         HotFragment dai = new HotFragment();
         SoonComeFragment re = new SoonComeFragment();
-        ZhaopianFragment zh = new ZhaopianFragment();
+        FindResouceFragment zh = new FindResouceFragment();
         fragmentList.add(dai);
         fragmentList.add(re);
         fragmentList.add(zh);
