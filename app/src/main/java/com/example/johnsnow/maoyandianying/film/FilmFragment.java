@@ -2,14 +2,15 @@ package com.example.johnsnow.maoyandianying.film;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.johnsnow.maoyandianying.Base.BaseFragment;
 import com.example.johnsnow.maoyandianying.R;
-import com.example.johnsnow.maoyandianying.film.fragment.HotFragment;
 import com.example.johnsnow.maoyandianying.film.fragment.FragmentRevealExample;
+import com.example.johnsnow.maoyandianying.film.fragment.HotFragment;
 import com.example.johnsnow.maoyandianying.film.fragment.SoonComeFragment;
 import com.example.johnsnow.maoyandianying.film.fragment.ZhaopianFragment;
 import com.flyco.tablayout.SlidingTabLayout;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
  */
 public class FilmFragment extends BaseFragment implements View.OnClickListener{
     SlidingTabLayout slidingTabLayout;
+    RecyclerView re;
     ViewPager viewPager;
     ArrayList<Fragment> fragmentList;
     RelativeLayout search;
