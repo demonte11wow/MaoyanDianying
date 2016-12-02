@@ -1,43 +1,62 @@
 package com.example.johnsnow.maoyandianying.film.adapter;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.johnsnow.maoyandianying.R;
+import com.example.johnsnow.maoyandianying.film.bean.ComeSoonBean;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
 import java.security.SecureRandom;
+import java.util.List;
 
 /**
  * Created by JohnSnow on 2016/12/2.
  */
 public class AnimalsHeadersAdapter extends AnimalsAdapter<RecyclerView.ViewHolder>
         implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder> {
+
+    private Context mContext;
+    private final LayoutInflater mLayoutInflater;
+    private List<ComeSoonBean.DataBean.ComingBean> csList;
+    private List<String> titles;
+
+    public AnimalsHeadersAdapter(Context mContext, List<ComeSoonBean.DataBean.ComingBean> csList, List<String> titles) {
+        this.mContext = mContext;
+//        this.resultBean = resultBean;
+        this.csList = csList;
+        this.titles = titles;
+        mLayoutInflater = LayoutInflater.from(mContext);
+    }
+
+
+    @Override
+    public int getItemCount() {
+        return csList.size();
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_item, parent, false);
-        return new RecyclerView.ViewHolder(view) {
-        };
+
+        View view = mLayoutInflater.inflate(R.layout.view_item, parent, false);
+        return new filmCsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        TextView textView = (TextView) holder.itemView;
-        textView.setText(getItem(position));
+        ComeSoonBean.DataBean.ComingBean csFilmItem = csList.get(position);
     }
 
     @Override
     public long getHeaderId(int position) {
-        if (position == 0) {
-            return -1;
-        } else {
-            return getItem(position).charAt(0);
-        }
+        return Integer.valueOf(titles.get(position).replace("-",""));
     }
 
     @Override
@@ -51,7 +70,7 @@ public class AnimalsHeadersAdapter extends AnimalsAdapter<RecyclerView.ViewHolde
     @Override
     public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
         TextView textView = (TextView) holder.itemView;
-        textView.setText(String.valueOf(getItem(position).charAt(0)));
+        textView.setText(titles.get(position));
         holder.itemView.setBackgroundColor(getRandomColor());
     }
 
@@ -62,4 +81,28 @@ public class AnimalsHeadersAdapter extends AnimalsAdapter<RecyclerView.ViewHolde
         });
     }
 
+    class filmCsViewHolder extends RecyclerView.ViewHolder {
+        ImageView film_image;
+        TextView film_title;
+        TextView film_score_audience;
+        TextView film_score_profession;
+        TextView film_scm;
+        TextView film_shownfo;
+        TextView film_submit;
+        LinearLayout ll_bottom;
+        ImageView rv_film_type;
+
+        public filmCsViewHolder(View itemView) {
+            super(itemView);
+            film_image = (ImageView) itemView.findViewById(R.id.film_image);
+            film_title = (TextView) itemView.findViewById(R.id.film_title);
+            film_score_audience = (TextView) itemView.findViewById(R.id.film_score_audience);
+            film_score_profession = (TextView) itemView.findViewById(R.id.film_score_profession);
+            film_scm = (TextView) itemView.findViewById(R.id.film_scm);
+            film_shownfo = (TextView) itemView.findViewById(R.id.film_shownfo);
+            film_submit = (TextView) itemView.findViewById(R.id.film_submit);
+            ll_bottom = (LinearLayout) itemView.findViewById(R.id.ll_bottom);
+            rv_film_type = (ImageView) itemView.findViewById(R.id.rv_film_type);
+        }
+    }
 }
