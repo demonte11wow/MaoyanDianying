@@ -82,6 +82,10 @@ public class SoonComeFragment extends BaseFragment {
         csList = csBean.getData().getComing();
         titles = new ArrayList<>();
         mDetailTitles = new ArrayList<>();
+        titles.add("0");
+        titles.add("1");
+        mDetailTitles.add("0");
+        mDetailTitles.add("1");
         for(int i = 0; i < csList.size();i++){
             titles.add(csList.get(i).getRt());
             mDetailTitles.add(csList.get(i).getComingTitle());
@@ -116,9 +120,4 @@ public class SoonComeFragment extends BaseFragment {
             return LinearLayoutManager.HORIZONTAL;
         }
     }
-//
-//    private String[] getDummyDataSet() {
-//        return getResources().getStringArray(R.array.animals);
-//    }
-
 }
