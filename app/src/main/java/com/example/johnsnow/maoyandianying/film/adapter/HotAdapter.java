@@ -52,6 +52,7 @@ public class HotAdapter extends BaseAdapter {
 
         Drawable drawable_yushou =mContext.getDrawable(R.drawable.text_yushou_shape);
         Drawable drawable_goupiao =mContext.getDrawable(R.drawable.text_goupiao_shape);
+        Drawable drawable_is3d =mContext.getDrawable(R.drawable.rw);
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.hot_list_item, null);
@@ -64,6 +65,7 @@ public class HotAdapter extends BaseAdapter {
             viewHolder.film_shownfo = (TextView) convertView.findViewById(R.id.film_shownfo);
             viewHolder.film_submit = (TextView) convertView.findViewById(R.id.film_submit);
             viewHolder.ll_bottom = (LinearLayout) convertView.findViewById(R.id.ll_bottom);
+            viewHolder.rv_film_type = (ImageView) convertView.findViewById(R.id.rv_film_type);
             //设置tag
             convertView.setTag(viewHolder);
         } else {
@@ -94,6 +96,12 @@ public class HotAdapter extends BaseAdapter {
             viewHolder.film_score_audience.setText("暂无");
         }
 
+        if(filmItem.isValue3d()){
+            viewHolder.rv_film_type.setImageDrawable(drawable_is3d);
+        } else {
+            viewHolder.rv_film_type.setVisibility(View.GONE);
+        }
+
         if(position != 0){
             viewHolder.ll_bottom.setVisibility(View.GONE);
         } else {
@@ -112,5 +120,6 @@ public class HotAdapter extends BaseAdapter {
         TextView film_shownfo;
         TextView film_submit;
         LinearLayout ll_bottom;
+        ImageView rv_film_type;
     }
 }

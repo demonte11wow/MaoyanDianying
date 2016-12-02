@@ -1,1 +1,1 @@
-include ':app', ':okhttputils', ':FlycoTabLayout_Lib', ':circualreveal'
+include ':app', ':okhttputils', ':FlycoTabLayout_Lib', ':circualreveal', ':material'
