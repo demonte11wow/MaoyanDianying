@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,16 @@ import com.example.johnsnow.maoyandianying.R;
 import com.example.johnsnow.maoyandianying.film.bean.ComeSoonBean;
 import com.example.johnsnow.maoyandianying.film.bean.Hor1Bean;
 import com.example.johnsnow.maoyandianying.film.bean.Hor2Bean;
+import com.example.johnsnow.maoyandianying.global.MyConstants;
+import com.google.gson.Gson;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.security.SecureRandom;
 import java.util.List;
+
+import okhttp3.Call;
 
 /**
  * Created by JohnSnow on 2016/12/2.
@@ -34,19 +41,15 @@ public class ComSoonHeadersAdapter extends BaseHeadAdapter<RecyclerView.ViewHold
     public static final int HORIZANTAL1 = 0;
     public static final int HORIZANTAL2 = 1;
     public static final int ITEM_TYPE_CONTENT = 2;
-    private List<Hor1Bean.DataBean> hoList1;
-    private List<Hor2Bean.DataBean.ComingBean> hoList2;
 
 
     public ComSoonHeadersAdapter(Context mContext, List<ComeSoonBean.DataBean.ComingBean> csList,
-                                 List<String> titles, List<String> mDetailTitles,List<Hor1Bean.DataBean> hoList1,List<Hor2Bean.DataBean.ComingBean> hoList2) {
+                                 List<String> titles, List<String> mDetailTitles) {
         this.mContext = mContext;
 //        this.resultBean = resultBean;
         this.csList = csList;
         this.titles = titles;
         this.mDetailTitles = mDetailTitles;
-        this.hoList1 = hoList1;
-        this.hoList2 = hoList2;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
 
@@ -75,9 +78,9 @@ public class ComSoonHeadersAdapter extends BaseHeadAdapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == HORIZANTAL1) {
-            return new HorHolder1(mLayoutInflater.inflate(R.layout.cs_recyle1, null), mContext, hoList1);
+            return new HorHolder1(mLayoutInflater.inflate(R.layout.cs_recyle1, null), mContext);
         } else if (viewType == HORIZANTAL2) {
-            return new HorHolder2(mLayoutInflater.inflate(R.layout.cs_recyle2, null), mContext, hoList2);
+            return new HorHolder2(mLayoutInflater.inflate(R.layout.cs_recyle2, null), mContext);
         }
         View view = mLayoutInflater.inflate(R.layout.view_item, parent, false);
         return new filmCsViewHolder(view);
@@ -163,19 +166,59 @@ public class ComSoonHeadersAdapter extends BaseHeadAdapter<RecyclerView.ViewHold
         }
     }
 
+
+    /**
+     * 联网逻辑分离1
+     */
     private class HorHolder1 extends RecyclerView.ViewHolder {
         private RecyclerView recyclerView;
         public Context mContext;
         private List<Hor1Bean.DataBean> hoList1;
+        private Hor1Bean hoBean1;
 
-        public HorHolder1(View inflate, Context mContext, List<Hor1Bean.DataBean> hoList1) {
+        public HorHolder1(View inflate, Context mContext) {
             super(inflate);
             recyclerView = (RecyclerView) itemView.findViewById(R.id.recy_cs1);
-            this.hoList1 = hoList1;
             this.mContext = mContext;
         }
 
         public void setData() {
+            getDataSc1FromServer(MyConstants.COME_SOON_SCROLLVIEW1);
+        }
+
+        private void getDataSc1FromServer(String url) {
+            OkHttpUtils
+                    .get()
+                    .url(url)
+                    .id(100)
+                    .build()
+                    .execute(new MyStringCallback1());
+        }
+        private class MyStringCallback1 extends StringCallback {
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e("TAG", "联网失败" + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                switch (id) {
+                    case 100:
+                        if (response != null) {
+                            processData1(response);
+                        }
+                        break;
+                    case 101:
+//                    Toast.makeText(mContext, "https", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        }
+        private void processData1(String response) {
+            Gson gson = new Gson();
+            hoBean1 = gson.fromJson(response, Hor1Bean.class);
+            hoList1 = hoBean1.getData();
             //设置RecyclerView
             recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
             HorViewAdapter1 adapter = new HorViewAdapter1(mContext,hoList1);
@@ -183,19 +226,62 @@ public class ComSoonHeadersAdapter extends BaseHeadAdapter<RecyclerView.ViewHold
         }
     }
 
+
+    /**
+     * 联网逻辑分离2
+     */
     private class HorHolder2 extends RecyclerView.ViewHolder {
         private RecyclerView recyclerView;
         public Context mContext;
+        private Hor2Bean hoBean2;
         private List<Hor2Bean.DataBean.ComingBean> hoList2;
 
-        public HorHolder2(View inflate, Context mContext, List<Hor2Bean.DataBean.ComingBean> hoList2) {
+        public HorHolder2(View inflate, Context mContext) {
             super(inflate);
             recyclerView = (RecyclerView) itemView.findViewById(R.id.recy_cs2);
-            this.hoList2 = hoList2;
             this.mContext = mContext;
         }
 
         public void setData() {
+            getDataSc2FromServer(MyConstants.COME_SOON_SCROLLVIEW2);
+        }
+
+        private void getDataSc2FromServer(String url) {
+            OkHttpUtils
+                    .get()
+                    .url(url)
+                    .id(100)
+                    .build()
+                    .execute(new MyStringCallback2());
+        }
+
+        private class MyStringCallback2 extends StringCallback {
+
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                Log.e("TAG", "联网失败" + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                switch (id) {
+                    case 100:
+                        if (response != null) {
+                            processData2(response);
+                        }
+                        break;
+                    case 101:
+//                    Toast.makeText(mContext, "https", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        }
+
+        private void processData2(String response) {
+            Gson gson = new Gson();
+            hoBean2 = gson.fromJson(response, Hor2Bean.class);
+            hoList2 = hoBean2.getData().getComing();
+
             //设置RecyclerView
             recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
             HorViewAdapter2 adapter = new HorViewAdapter2(mContext,hoList2);

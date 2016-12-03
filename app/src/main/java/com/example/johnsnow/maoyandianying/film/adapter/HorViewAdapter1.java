@@ -16,12 +16,13 @@ import java.util.List;
 
 /**
  * Created by JohnSnow on 2016/12/2.
- *
  */
 public class HorViewAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<Hor1Bean.DataBean> hoList1;
-    public HorViewAdapter1 (Context mContext,List<Hor1Bean.DataBean> hoList1){
+    Hor1Bean hoBean1;
+
+    public HorViewAdapter1(Context mContext,List<Hor1Bean.DataBean> hoList1) {
         this.mContext = mContext;
         this.hoList1 = hoList1;
     }
@@ -46,6 +47,7 @@ public class HorViewAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private ImageView cs_film_image;
         private TextView cs_film_name;
         private TextView cs_film_origin_name;
+
         public MyViewHolder(View inflate) {
             super(inflate);
             cs_film_image = (ImageView) inflate.findViewById(R.id.cs_film_image);
@@ -60,5 +62,6 @@ public class HorViewAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     .load(hoList1.get(position).getImg())
                     .into(cs_film_image);
         }
+
     }
 }

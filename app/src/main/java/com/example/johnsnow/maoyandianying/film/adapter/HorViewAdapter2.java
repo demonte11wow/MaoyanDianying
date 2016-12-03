@@ -22,7 +22,8 @@ public class HorViewAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Context mContext;
     private List<Hor2Bean.DataBean.ComingBean> hoList2;
 
-    public HorViewAdapter2(Context mContext, List<Hor2Bean.DataBean.ComingBean> hoList2) {
+
+    public HorViewAdapter2(Context mContext,List<Hor2Bean.DataBean.ComingBean> hoList2) {
         this.mContext = mContext;
         this.hoList2 = hoList2;
     }
@@ -55,20 +56,24 @@ public class HorViewAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewHolde
             iv_movie = (ImageView) inflate.findViewById(R.id.iv_movie);
             tv_name = (TextView) inflate.findViewById(R.id.tv_name);
             tv_people = (TextView) inflate.findViewById(R.id.tv_people);
+
+
         }
 
         public void setData(final int position) {
             String dateTemp = hoList2.get(position).getComingTitle().split(" ")[0];
-            if(dateTemp.startsWith("20")){
+            if (dateTemp.startsWith("20")) {
                 dateTemp = dateTemp.substring(2);
             }
             date.setText(dateTemp);//去掉星期几,2017就去掉20
             tv_name.setText(hoList2.get(position).getNm());
-            tv_people.setText(""+hoList2.get(position).getWish());
-            Log.e("chenTagImage",hoList2.get(position).getImg());
+            tv_people.setText("" + hoList2.get(position).getWish());
+            Log.e("chenTagImage", hoList2.get(position).getImg());
             Glide.with(mContext)
-                    .load(hoList2.get(position).getImg().replace("w.h/",""))
+                    .load(hoList2.get(position).getImg().replace("w.h/", ""))
                     .into(iv_movie);
+
         }
+
     }
 }

@@ -8,7 +8,7 @@ import java.util.Collection;
 
 
 /**
- * 标题
+ * Created by JohnSnow on 2016/12/2.
  */
 public abstract class BaseHeadAdapter<VH extends RecyclerView.ViewHolder>
     extends RecyclerView.Adapter<VH> {

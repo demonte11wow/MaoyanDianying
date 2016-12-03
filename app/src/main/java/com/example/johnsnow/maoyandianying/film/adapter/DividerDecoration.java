@@ -10,7 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- *
+ *Fuck
  */
 
 public class DividerDecoration extends RecyclerView.ItemDecoration {
