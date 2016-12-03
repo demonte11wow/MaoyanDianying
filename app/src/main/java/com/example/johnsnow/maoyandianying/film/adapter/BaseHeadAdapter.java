@@ -8,7 +8,7 @@ import java.util.Collection;
 
 
 /**
- * Adapter holding a list of animal names of type String. Note that each item must be unique.
+ * 标题
  */
 public abstract class BaseHeadAdapter<VH extends RecyclerView.ViewHolder>
     extends RecyclerView.Adapter<VH> {

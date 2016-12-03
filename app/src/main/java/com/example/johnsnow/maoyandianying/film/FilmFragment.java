@@ -9,10 +9,11 @@ import android.widget.Toast;
 
 import com.example.johnsnow.maoyandianying.Base.BaseFragment;
 import com.example.johnsnow.maoyandianying.R;
+import com.example.johnsnow.maoyandianying.film.fragment.FindResouceFragment;
 import com.example.johnsnow.maoyandianying.film.fragment.FragmentRevealExample;
 import com.example.johnsnow.maoyandianying.film.fragment.HotFragment;
 import com.example.johnsnow.maoyandianying.film.fragment.SoonComeFragment;
-import com.example.johnsnow.maoyandianying.film.fragment.FindResouceFragment;
+import com.example.johnsnow.maoyandianying.film.transform.ZoomOutPageTransformer;
 import com.flyco.tablayout.SlidingTabLayout;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class FilmFragment extends BaseFragment implements View.OnClickListener{
         View view = View.inflate(getContext(), R.layout.film_fragment,null);
         slidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.tl_1);
         viewPager = (ViewPager) view.findViewById(R.id.vb_film);
+        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         search = (RelativeLayout) view.findViewById(R.id.vb_search);
         search.setOnClickListener(this);
         return view;

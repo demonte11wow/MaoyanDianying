@@ -79,9 +79,9 @@ public class MainActivity extends FragmentActivity implements BackHandledInterfa
     private void initFragment() {
         fragments = new ArrayList<>();
         fragments.add(new FilmFragment());
+        fragments.add(new CinemaFragment());
         fragments.add(new FindFragment());
         fragments.add(new MyCenterFragment());
-        fragments.add(new CinemaFragment());
     }
 
     private void initListener() {
