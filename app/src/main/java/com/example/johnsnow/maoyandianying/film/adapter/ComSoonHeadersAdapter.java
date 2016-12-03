@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.johnsnow.maoyandianying.Base.BaseHeadAdapter;
 import com.example.johnsnow.maoyandianying.R;
 import com.example.johnsnow.maoyandianying.film.bean.ComeSoonBean;
 import com.example.johnsnow.maoyandianying.film.bean.Hor1Bean;
@@ -82,7 +83,7 @@ public class ComSoonHeadersAdapter extends BaseHeadAdapter<RecyclerView.ViewHold
         } else if (viewType == HORIZANTAL2) {
             return new HorHolder2(mLayoutInflater.inflate(R.layout.cs_recyle2, null), mContext);
         }
-        View view = mLayoutInflater.inflate(R.layout.view_item, parent, false);
+        View view = mLayoutInflater.inflate(R.layout.view_cs_item, parent, false);
         return new filmCsViewHolder(view);
 
     }
@@ -112,7 +113,7 @@ public class ComSoonHeadersAdapter extends BaseHeadAdapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_header, parent, false);
+                .inflate(R.layout.view_cs_header, parent, false);
         return new RecyclerView.ViewHolder(view) {
         };
     }

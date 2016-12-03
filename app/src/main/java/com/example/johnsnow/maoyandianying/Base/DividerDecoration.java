@@ -1,4 +1,4 @@
-package com.example.johnsnow.maoyandianying.film.adapter;
+package com.example.johnsnow.maoyandianying.Base;
 
 import android.content.Context;
 import android.content.res.TypedArray;

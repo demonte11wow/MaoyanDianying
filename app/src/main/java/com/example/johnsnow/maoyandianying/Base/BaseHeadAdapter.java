@@ -1,4 +1,4 @@
-package com.example.johnsnow.maoyandianying.film.adapter;
+package com.example.johnsnow.maoyandianying.Base;
 
 import android.support.v7.widget.RecyclerView;
 
