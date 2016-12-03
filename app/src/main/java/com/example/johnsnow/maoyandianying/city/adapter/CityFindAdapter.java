@@ -11,6 +11,7 @@ import com.example.johnsnow.maoyandianying.Base.BaseHeadAdapter;
 import com.example.johnsnow.maoyandianying.R;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 public class CityFindAdapter extends BaseHeadAdapter<RecyclerView.ViewHolder>
@@ -57,11 +58,10 @@ public class CityFindAdapter extends BaseHeadAdapter<RecyclerView.ViewHolder>
         }
 
         private int getRandomColor() {
-//            SecureRandom rgen = new SecureRandom();
-//            return Color.HSVToColor(150, new float[]{
-//                    rgen.nextInt(150), 1, 1
-//            });
-            return  Color.parseColor("#ADADAD");
+            SecureRandom rgen = new SecureRandom();
+            return Color.HSVToColor(150, new float[]{
+                    rgen.nextInt(150), 1, 1
+            });
         }
 
     }

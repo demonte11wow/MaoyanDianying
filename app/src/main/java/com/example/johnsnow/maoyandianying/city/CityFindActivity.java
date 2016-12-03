@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.example.johnsnow.maoyandianying.R;
 import com.example.johnsnow.maoyandianying.city.fragment.CityFragment;
+import com.example.johnsnow.maoyandianying.utils.ActionBarUtils;
 
 import immortalz.me.library.TransitionsHeleper;
 import immortalz.me.library.bean.InfoBean;
@@ -19,6 +20,7 @@ public class CityFindActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBarUtils.initActionBar(this,"#ff0099cc");
         setContentView(R.layout.activity_city_find);
 
         getSupportFragmentManager()

@@ -9,12 +9,15 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.johnsnow.maoyandianying.utils.DensityUtil;
+
 /**
  * Created by Administrator on 2016/9/24.
  */
 public class IndexView extends View {
     private Paint paint = new Paint();
     private OnTouchLetterChangeListenner listenner;
+    private Context mContext;
     // 是否画出背景
     private boolean showBg = false;
     // 选中的项
@@ -31,6 +34,7 @@ public class IndexView extends View {
 
     public IndexView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.mContext = context;
     }
 
     @Override
@@ -47,11 +51,11 @@ public class IndexView extends View {
         }
         // 画字母
         for (int i = 0; i < letters.length; i++) {
-            paint.setColor(Color.BLACK);
+            paint.setColor(Color.parseColor("#FFFFFF"));
             // 设置字体格式
             paint.setTypeface(Typeface.DEFAULT_BOLD);
             paint.setAntiAlias(true);
-            paint.setTextSize(20f);
+            paint.setTextSize(DensityUtil.dip2px(mContext,15));
             // 如果这一项被选中，则换一种颜色画
             if (i == choose) {
                 paint.setColor(Color.parseColor("#F88701"));

@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.johnsnow.maoyandianying.Base.DividerDecoration;
 import com.example.johnsnow.maoyandianying.R;
 import com.example.johnsnow.maoyandianying.city.adapter.CityFindAdapter;
 import com.example.johnsnow.maoyandianying.city.bean.CityBean;
@@ -156,7 +155,7 @@ public class CityFragment extends Fragment {
         recyclerView.addItemDecoration(headersDecor);
 
         // Add decoration for dividers between list items
-        recyclerView.addItemDecoration(new DividerDecoration(getActivity()));
+//        recyclerView.addItemDecoration(new DividerDecoration(getActivity()));
     }
 
     private void bubble_sort(List<CityBean.DataBean> cbNameList) {

@@ -6,9 +6,9 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.johnsnow.maoyandianying.Base.BaseFragment;
+import com.example.johnsnow.maoyandianying.Base.DividerDecoration;
 import com.example.johnsnow.maoyandianying.R;
 import com.example.johnsnow.maoyandianying.film.adapter.ComSoonHeadersAdapter;
-import com.example.johnsnow.maoyandianying.Base.DividerDecoration;
 import com.example.johnsnow.maoyandianying.film.bean.ComeSoonBean;
 import com.example.johnsnow.maoyandianying.film.bean.Hor1Bean;
 import com.example.johnsnow.maoyandianying.film.bean.Hor2Bean;
