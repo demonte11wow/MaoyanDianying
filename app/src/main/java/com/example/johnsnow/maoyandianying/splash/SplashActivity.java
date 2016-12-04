@@ -47,12 +47,12 @@ public class SplashActivity extends AppCompatActivity {
     boolean isStart = false;
 
 
-    Handler handler = new Handler(){
+    Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
 
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 0:
                     getSplashImageFromServer();
                     break;
@@ -60,9 +60,9 @@ public class SplashActivity extends AppCompatActivity {
                     startMainActivity();
                     break;
                 case 2:
-                    if(lastSecond > 0){
+                    if (lastSecond > 0) {
                         skip_btn.setText("跳过:" + lastSecond-- + "s");
-                        sendEmptyMessageDelayed(2,1000);
+                        sendEmptyMessageDelayed(2, 1000);
                     }
                     break;
             }
@@ -81,7 +81,7 @@ public class SplashActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 //        getSplashImageFromServer();
-        handler.sendEmptyMessageDelayed(0,2000);
+        handler.sendEmptyMessageDelayed(0, 2000);
     }
 
     private void getSplashImageFromServer() {
@@ -120,31 +120,34 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void processData(String response) {
-        Gson gson = new Gson();
-        SplashBean sBean = gson.fromJson(response, SplashBean.class);
-        String splashUrl = sBean.getPosters().get(0).getPic();
-        if(SplashActivity.this.isDestroyed()){
-            return;
+        try {
+            Gson gson = new Gson();
+            SplashBean sBean = gson.fromJson(response, SplashBean.class);
+
+            String splashUrl = sBean.getPosters().get(0).getPic();
+            Glide
+                    .with(this)
+                    .load(splashUrl)
+                    .asBitmap() //必须写，否则会报类型转化异常
+                    .into(target); //此处为target
+        } catch (Exception e) {
+            startMainActivity();
         }
-        Glide
-                .with(this)
-                .load(splashUrl)
-                .asBitmap() //必须写，否则会报类型转化异常
-                .into(target); //此处为target
+
     }
 
-    private SimpleTarget target = new SimpleTarget<Bitmap>(){
+    private SimpleTarget target = new SimpleTarget<Bitmap>() {
         @Override
         public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
             //使用bitmap做一些事,如
-            if(null != resource){
+            if (null != resource) {
                 server_splash.setImageBitmap(resource);
             }
             AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);//0:完全透明 1：完全不透明
             alphaAnimation.setDuration(1000);
             alphaAnimation.setInterpolator(new AccelerateInterpolator());//设置动画的变化率
-            handler.sendEmptyMessageDelayed(1,6000);
-            handler.sendEmptyMessageDelayed(2,1000);
+            handler.sendEmptyMessageDelayed(1, 6000);
+            handler.sendEmptyMessageDelayed(2, 1000);
             server_splash.startAnimation(alphaAnimation);
         }
     };
@@ -156,9 +159,9 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void startMainActivity() {
-        if(!isStart){
+        if (!isStart) {
             isStart = true;
-            Intent intent = new Intent(this,MainActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             //关闭当前页面
             finish();
@@ -173,16 +176,12 @@ public class SplashActivity extends AppCompatActivity {
         unbindDrawables(server_splash);
     }
 
-    private void unbindDrawables(View view)
-    {
-        if (view.getBackground() != null)
-        {
+    private void unbindDrawables(View view) {
+        if (view.getBackground() != null) {
             view.getBackground().setCallback(null);
         }
-        if (view instanceof ViewGroup && !(view instanceof AdapterView))
-        {
-            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++)
-            {
+        if (view instanceof ViewGroup && !(view instanceof AdapterView)) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
                 unbindDrawables(((ViewGroup) view).getChildAt(i));
             }
             ((ViewGroup) view).removeAllViews();
