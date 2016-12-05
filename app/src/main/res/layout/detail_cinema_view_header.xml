@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="30dp">
+    <TextView
+        android:id="@+id/rv_square"
+        android:drawableRight="@drawable/a4k"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="区域"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/rv_liwozuijin"
+        android:drawableRight="@drawable/a4k"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="离我最近"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/rv_label"
+        android:drawableRight="@drawable/a4k"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="品牌"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/rv_texiao"
+        android:drawableRight="@drawable/a4k"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="特效/服务"
+        android:layout_height="match_parent" />
+</LinearLayout>

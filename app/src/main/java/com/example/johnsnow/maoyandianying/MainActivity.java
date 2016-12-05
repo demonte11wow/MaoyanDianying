@@ -1,8 +1,12 @@
 package com.example.johnsnow.maoyandianying;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
@@ -10,12 +14,12 @@ import android.widget.RadioGroup;
 
 import com.example.johnsnow.maoyandianying.Base.BackHandledInterface;
 import com.example.johnsnow.maoyandianying.Base.BaseFragment;
+import com.example.johnsnow.maoyandianying.cinema.CinemaFragment;
 import com.example.johnsnow.maoyandianying.film.FilmFragment;
 import com.example.johnsnow.maoyandianying.film.fragment.FragmentRevealExample;
 import com.example.johnsnow.maoyandianying.find.FindFragment;
 import com.example.johnsnow.maoyandianying.mycenter.MyCenterFragment;
 import com.example.johnsnow.maoyandianying.utils.ActionBarUtils;
-import com.example.johnsnow.maoyandianying.yingyuan.CinemaFragment;
 
 import java.util.ArrayList;
 
@@ -23,6 +27,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends FragmentActivity implements BackHandledInterface {
+    private static final int WRITE_COARSE_LOCATION_REQUEST_CODE = 0;
     @Bind(R.id.frameLayout)
     FrameLayout frameLayout;
     @Bind(R.id.rb_cinema)
@@ -45,6 +50,13 @@ public class MainActivity extends FragmentActivity implements BackHandledInterfa
     FilmFragment filmFragment;
     Bundle bundle;
 
+    //SDK在Android 6.0下需要进行运行检测的权限如下：
+//    Manifest.permission.ACCESS_COARSE_LOCATION,
+//    Manifest.permission.ACCESS_FINE_LOCATION,
+//    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//    Manifest.permission.READ_EXTERNAL_STORAGE,
+//    Manifest.permission.READ_PHONE_STATE
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +67,13 @@ public class MainActivity extends FragmentActivity implements BackHandledInterfa
         initFragment();
         initListener();
         rgMain.check(R.id.rb_film);
+        //这里以ACCESS_COARSE_LOCATION为例
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            //申请WRITE_EXTERNAL_STORAGE权限
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    WRITE_COARSE_LOCATION_REQUEST_CODE);//自定义的code
+        }
     }
 
     @Override

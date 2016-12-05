@@ -1,9 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="影院"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/light_blue_color">
+
+    </LinearLayout>
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.peipei.app.MainActivity">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                app:contentScrim="@color/light_blue_color"
+                app:layout_scrollFlags="scroll">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:gravity="center"
+                    android:src="@drawable/img_tips_error_space_no_data"
+                    />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+                <TextView
+                    android:id="@+id/rv_square"
+                    android:drawableRight="@drawable/a4k"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="区域"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/rv_liwozuijin"
+                    android:drawableRight="@drawable/a4k"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="离我最近"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/rv_label"
+                    android:drawableRight="@drawable/a4k"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="品牌"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/rv_texiao"
+                    android:drawableRight="@drawable/a4k"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="特效/服务"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <com.example.johnsnow.maoyandianying.cinema.view.MyListView
+                android:id="@+id/cinema_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </com.example.johnsnow.maoyandianying.cinema.view.MyListView>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

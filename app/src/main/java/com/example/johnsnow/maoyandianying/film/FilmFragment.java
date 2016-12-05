@@ -107,9 +107,11 @@ public class FilmFragment extends BaseFragment implements View.OnClickListener {
                         String district = aMapLocation.getDistrict();
                         Log.e("onLocationChanged", "city: " + city);
                         Log.e("onLocationChanged", "district: " + district);
-//                            String location = StringUtils.extractLocation(city, district);
+                        String location = StringUtils.extractLocation(city, district);
+                        if(!city_find.getText().toString().equals(location)){
+                            showDialog(location);
+                        }
 
-                        showDialog(city);
                     } else {
                         //定位失败
                         Toast.makeText(mContext,"定位失败",Toast.LENGTH_SHORT).show();
@@ -125,14 +127,16 @@ public class FilmFragment extends BaseFragment implements View.OnClickListener {
         textView.setText("检测到地址变更，是否重定位");
         textView.setGravity(Gravity.CENTER_HORIZONTAL);
         final String currentCity = city;
+
+
         new AlertDialog.Builder(mContext)
                 .setTitle("提示")
                 .setView(textView)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        city_find.setText(StringUtils.extractLocation(currentCity, null));
-                        PreferenceUtils.putString(mContext,"city",currentCity);
+                        city_find.setText(currentCity);
+                        PreferenceUtils.putString(mContext,"currentCity",currentCity);
                     }
                 })
                 .setNegativeButton("取消", null)
