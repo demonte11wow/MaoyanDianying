@@ -25,7 +25,6 @@ public class HotCityViewAdapter extends BaseAdapter {
         this.mContext = context;
     }
 
-
     @Override
     public int getCount() {
        return hotCityNames.size();

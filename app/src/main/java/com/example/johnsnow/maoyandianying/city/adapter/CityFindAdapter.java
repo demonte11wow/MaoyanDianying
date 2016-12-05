@@ -23,6 +23,7 @@ import com.example.johnsnow.maoyandianying.MainActivity;
 import com.example.johnsnow.maoyandianying.R;
 import com.example.johnsnow.maoyandianying.global.CityName;
 import com.example.johnsnow.maoyandianying.global.Utils;
+import com.example.johnsnow.maoyandianying.utils.StringUtils;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
 import java.security.SecureRandom;
@@ -166,7 +167,12 @@ public class CityFindAdapter extends BaseHeadAdapter<RecyclerView.ViewHolder>
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                initLocation();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        initLocation();
+                    }
+                }).start();
             }
         };
 
@@ -176,7 +182,7 @@ public class CityFindAdapter extends BaseHeadAdapter<RecyclerView.ViewHolder>
             //GPS定位获取当前城市
             if (isFirst) {
                 currentCity.setText("定位中...");
-                handler.sendEmptyMessageDelayed(0, 2000);
+                handler.sendEmptyMessageDelayed(0, 1000);
                 isFirst = false;
             }
         }
@@ -198,8 +204,8 @@ public class CityFindAdapter extends BaseHeadAdapter<RecyclerView.ViewHolder>
                             String district = aMapLocation.getDistrict();
                             Log.e("onLocationChanged", "city: " + city);
                             Log.e("onLocationChanged", "district: " + district);
-//                            String location = StringUtils.extractLocation(city, district);
-                            currentCity.setText(city);
+                            String location = StringUtils.extractLocation(city, district);
+                            currentCity.setText(location);
                         } else {
                             Log.e("chenTag", String.valueOf(aMapLocation.getErrorCode()));
                             Log.e("chenTag", Utils.sHA1(mContext));
