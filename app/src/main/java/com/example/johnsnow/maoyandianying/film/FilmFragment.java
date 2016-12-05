@@ -1,8 +1,11 @@
 package com.example.johnsnow.maoyandianying.film;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,8 +22,6 @@ import com.example.johnsnow.maoyandianying.film.transform.ZoomOutPageTransformer
 import com.flyco.tablayout.SlidingTabLayout;
 
 import java.util.ArrayList;
-
-import immortalz.me.library.TransitionsHeleper;
 
 /**
  * Created by JohnSnow on 2016/11/30.
@@ -86,9 +87,23 @@ public class FilmFragment extends BaseFragment implements View.OnClickListener {
                     .commit();
 
         } else if(v.getId() == R.id.city_find){
-            TransitionsHeleper.startActivity(getActivity(),CityFindActivity.class,v);
+//            TransitionsHeleper.startActivity(getActivity(),CityFindActivity.class,v);
+
+            Intent intent = new Intent(getActivity(),
+                    CityFindActivity.class);
+            Bundle b = new Bundle();
+            intent.putExtras(b);
+            startActivityForResult(intent,1);
         }
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1&&resultCode==100){
+            Log.e("chenTag","ccc");
+            String currentCity = data.getStringExtra("currentCity");
+            city_find.setText(currentCity);
+        }
+    }
 }

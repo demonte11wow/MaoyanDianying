@@ -39,8 +39,6 @@ public class FragmentRevealExample extends Fragment implements View.OnClickListe
         final View edit_lay = rootView.findViewById(R.id.edit_lay);
         final View items = rootView.findViewById(R.id.items);
 
-
-
         edit_lay.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {

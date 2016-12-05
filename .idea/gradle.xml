@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/material" />
             <option value="$PROJECT_DIR$/okhttputils" />
             <option value="$PROJECT_DIR$/stickheader_library" />
+            <option value="$PROJECT_DIR$/transitionhelper" />
           </set>
         </option>
         <option name="myModules">
@@ -28,6 +29,7 @@
             <option value="$PROJECT_DIR$/material" />
             <option value="$PROJECT_DIR$/okhttputils" />
             <option value="$PROJECT_DIR$/stickheader_library" />
+            <option value="$PROJECT_DIR$/transitionhelper" />
           </set>
         </option>
       </GradleProjectSettings>

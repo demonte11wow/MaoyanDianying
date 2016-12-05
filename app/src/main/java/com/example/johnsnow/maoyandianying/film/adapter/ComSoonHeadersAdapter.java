@@ -124,9 +124,9 @@ public class ComSoonHeadersAdapter extends BaseHeadAdapter<RecyclerView.ViewHold
         TextView textView = (TextView) holder.itemView;
 
         if (position == 0) {
-            textView.setText("title1");
+            textView.setText("预告片推荐");
         } else if (position == 1) {
-            textView.setText("title2");
+            textView.setText("近期最受期待");
         } else {
             textView.setText(mDetailTitles.get(position));
         }

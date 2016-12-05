@@ -15,7 +15,7 @@
         android:background="@android:color/holo_blue_dark">
         <TextView
             android:id="@+id/city_find"
-            android:textSize="15sp"
+            android:textSize="13sp"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,8 +24,9 @@
             android:drawableRight="@drawable/ui"/>
         <com.flyco.tablayout.SlidingTabLayout
             android:layout_centerHorizontal="true"
+            tl:tl_tab_padding="15dp"
             android:id="@+id/tl_1"
-            android:layout_width="210dp"
+            android:layout_width="180dp"
             android:layout_height="48dp"
             tl:tl_indicator_margin_top="0dp"
             tl:tl_indicator_margin_bottom="0dp"

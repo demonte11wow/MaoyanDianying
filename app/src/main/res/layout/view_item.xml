@@ -6,6 +6,6 @@
     android:background="@drawable/white_touch"
     android:clickable="true"
     android:orientation="horizontal"
-    android:padding="10dp"
+    android:padding="20dp"
     android:text="asdasd"
     android:textSize="15sp" />

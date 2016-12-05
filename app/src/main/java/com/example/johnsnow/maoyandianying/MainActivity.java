@@ -42,13 +42,16 @@ public class MainActivity extends FragmentActivity implements BackHandledInterfa
     private ArrayList<BaseFragment> fragments;
     private BaseFragment content;
     private int position;
+    FilmFragment filmFragment;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBarUtils.initActionBar(this,"#ff0099cc");
+        ActionBarUtils.initActionBar(this, "#ff0099cc");
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
         initFragment();
         initListener();
         rgMain.check(R.id.rb_film);
@@ -78,10 +81,28 @@ public class MainActivity extends FragmentActivity implements BackHandledInterfa
 
     private void initFragment() {
         fragments = new ArrayList<>();
-        fragments.add(new FilmFragment());
+        filmFragment = new FilmFragment();
+
+//        Intent intent = getIntent();
+//        String currentCity = intent.getStringExtra("currentCity");
+//        bundle = new Bundle();
+//        bundle.putString("currentCity", currentCity);
+//        Log.e("chenTag", "resume");
+//
+//        if (null != currentCity && null != bundle && !bundle.isEmpty()){
+//            Log.e("chenTag", bundle.toString());
+//            filmFragment.setArguments(bundle);
+//        }
+
+        fragments.add(filmFragment);
         fragments.add(new CinemaFragment());
         fragments.add(new FindFragment());
         fragments.add(new MyCenterFragment());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     private void initListener() {
