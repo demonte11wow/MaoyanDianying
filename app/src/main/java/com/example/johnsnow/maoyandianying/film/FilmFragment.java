@@ -136,7 +136,7 @@ public class FilmFragment extends BaseFragment implements View.OnClickListener {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         city_find.setText(currentCity);
-                        PreferenceUtils.putString(mContext,"currentCity",currentCity);
+                        PreferenceUtils.putString(mContext, "currentCity", currentCity);
                     }
                 })
                 .setNegativeButton("取消", null)
