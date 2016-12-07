@@ -28,4 +28,24 @@
         <!-- Used for the background -->
         <item name="android:background">#FFFFFF</item>
     </style>
+
+    <style name="quick_option_dialog" parent="@style/Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">#ff0000</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabMaxWidth">72dp</item>
+        <item name="tabMinWidth">72dp</item>
+        <item name="tabSelectedTextColor">@android:color/holo_red_light</item>
+        <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
+    </style>
+
+    <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">20sp</item>
+        <item name="textAllCaps">false</item>
+
+    </style>
 </resources>

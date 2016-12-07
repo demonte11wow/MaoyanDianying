@@ -10,6 +10,7 @@
         android:background="@color/light_blue_color">
 
     </LinearLayout>
+
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -19,77 +20,85 @@
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            app:elevation="0dp"
-            android:layout_height="250dp">
+            android:layout_height="wrap_content">
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="wrap_content"
                 app:contentScrim="@color/light_blue_color"
                 app:layout_scrollFlags="scroll">
 
                 <ImageView
+                    android:id="@+id/title_image"
                     android:layout_width="match_parent"
-                    android:layout_height="220dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:src="@drawable/img_tips_error_space_no_data"
-                    />
+                    android:src="@drawable/img_tips_error_space_no_data" />
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
             <LinearLayout
                 android:id="@+id/lt_title"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/rv_square"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:drawableRight="@drawable/a4k"
                     android:gravity="center"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="区域"
-                    android:layout_height="match_parent" />
+                    android:text="区域" />
+
                 <TextView
                     android:id="@+id/rv_liwozuijin"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:drawableRight="@drawable/a4k"
                     android:gravity="center"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="离我最近"
-                    android:layout_height="match_parent" />
+                    android:text="离我最近" />
+
                 <TextView
                     android:id="@+id/rv_label"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:drawableRight="@drawable/a4k"
                     android:gravity="center"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="品牌"
-                    android:layout_height="match_parent" />
+                    android:text="品牌" />
+
                 <TextView
                     android:id="@+id/rv_texiao"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:drawableRight="@drawable/a4k"
                     android:gravity="center"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="特效/服务"
-                    android:layout_height="match_parent" />
+                    android:text="特效/服务" />
             </LinearLayout>
-
+            <FrameLayout
+                android:visibility="gone"
+                android:id="@+id/cinema_qy"
+                android:layout_width="match_parent"
+                android:alpha="0.5"
+                android:layout_height="300dp">
+            </FrameLayout>
         </android.support.design.widget.AppBarLayout>
+
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipToPadding="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
             <com.example.johnsnow.maoyandianying.cinema.view.MyListView
                 android:id="@+id/cinema_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </com.example.johnsnow.maoyandianying.cinema.view.MyListView>
-
         </android.support.v4.widget.NestedScrollView>
-
     </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

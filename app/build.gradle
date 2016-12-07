@@ -42,4 +42,5 @@ dependencies {
     compile project(':stickheader_library')
     compile files('libs/AMap_Location_V3.1.0_20161027.jar')
     compile project(':transitionhelper')
+    compile project(path: ':MaterialRefreshLayout_library')
 }

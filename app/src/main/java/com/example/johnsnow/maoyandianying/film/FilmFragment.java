@@ -108,6 +108,9 @@ public class FilmFragment extends BaseFragment implements View.OnClickListener {
                         Log.e("onLocationChanged", "city: " + city);
                         Log.e("onLocationChanged", "district: " + district);
                         String location = StringUtils.extractLocation(city, district);
+
+                        PreferenceUtils.putString(mContext, "currentCity", location);
+                        PreferenceUtils.putString(mContext, "currentDistrict", district);
                         if(!city_find.getText().toString().equals(location)){
                             showDialog(location);
                         }
@@ -136,7 +139,6 @@ public class FilmFragment extends BaseFragment implements View.OnClickListener {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         city_find.setText(currentCity);
-                        PreferenceUtils.putString(mContext, "currentCity", currentCity);
                     }
                 })
                 .setNegativeButton("取消", null)

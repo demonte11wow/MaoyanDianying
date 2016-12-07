@@ -10,4 +10,6 @@ public class MyConstants {
     public static final String COME_SOON_RE = "http://api.maoyan.com/mmdb/movie/v2/list/rt/order/coming.json?ci=1&limit=12&token=&utm_campaign=AmovieBmovieCD-1&movieBundleVersion=7501&utm_source=baidu2-dy&utm_medium=android&utm_term=7.5.0&utm_content=162785154327873&net=255&dModel=CHM-TL00H&uuid=DD248CD671940B81A053CD16752CB1ED59F2F7716F6B2B1FDBA408C200CE86CD&lat=39.86921443098112&lng=116.42276039489884&__reqTraceID=8854815685137699681&refer=%2FWelcome&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1480482076562&__skua=32bcf146c756ecefe7535b95816908e3&__skno=ca4729bc-11a4-4cdc-bf2b-7cab73a59ad5&__skcy=s8W2U3PA7CvzjWSYfR7bO0Rcy68%3D";
     public static final String COME_SOON_SCROLLVIEW2 = "http://api.maoyan.com/mmdb/movie/v1/list/wish/order/coming.json?offset=0&limit=50&ci=1";
     public static final String COME_SOON_SCROLLVIEW1 = "http://api.maoyan.com/mmdb/movie/lp/list.json";
+    public static final String CINEMA_URL = "http://m.maoyan.com/cinemas.json";
+    public static final String FIND_URL = "http://api.maoyan.com/sns/v5/feed.json?offset=";
 }

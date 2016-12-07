@@ -1,48 +1,69 @@
 package com.example.johnsnow.maoyandianying.cinema.view;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Display;
+import android.support.v4.app.DialogFragment;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RadioGroup;
 
-import com.rey.material.app.Dialog;
+import com.example.johnsnow.maoyandianying.Base.BaseFragment;
+import com.example.johnsnow.maoyandianying.R;
+
+import java.util.ArrayList;
+import java.util.zip.Inflater;
+
 
 /**
  * Created by JohnSnow on 2016/12/6.
  */
-public class CustomDialog extends Dialog {
+public class CustomDialog extends DialogFragment {
     private Context mContext;
     private int layout;
     private int dy;
     private int dx;
+    View view;
+    private ArrayList<BaseFragment> fragments;
+    private int position;
+    RadioGroup rgMain;
+    private BaseFragment content;
+    private Inflater inflater;
 
-    public CustomDialog(Context context, int layout,int dx, int dy) {
-        super(context);
-        this.mContext = context;
-        this.layout = layout;
-        this.dy = dy;
-        this.dx = dx;
-        View view = getLayoutInflater().inflate(layout, null);
-        super.setContentView(view);
+    public CustomDialog(Context mContext,int x,int y){
+        this.mContext = mContext;
+        this.dx = x;
+        this.dy = y;
     }
 
     @Override
-    protected void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
-//        getWindow().setGravity(Gravity.BOTTOM); //显示在底部
-        Window dialogWindow = getWindow();
-        WindowManager m = getWindow().getWindowManager();
-        Display d = m.getDefaultDisplay();
-        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-        lp.x = dx; // 新位置X坐标
-        lp.y = dy; // 新位置Y坐标
-        lp.height = 800;
-        lp.width = d.getWidth();
-        lp.dimAmount =0f;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        View view = inflater.inflate(R.layout.dialog_quyu, container);
+        return view;
+    }
 
-        //设置dialog的宽度为当前手机屏幕的宽度
-        getWindow().setAttributes(lp);
+    public void onStart() {
+        super.onStart();
+        Window win = getDialog().getWindow();
+        // 一定要设置Background，如果不设置，window属性设置无效
+        win.setBackgroundDrawable( new ColorDrawable(Color.WHITE));
+
+        DisplayMetrics dm = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics( dm );
+
+        WindowManager.LayoutParams params = win.getAttributes();
+        // 使用ViewGroup.LayoutParams，以便Dialog 宽度充满整个屏幕
+        params.width =  ViewGroup.LayoutParams.MATCH_PARENT;
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        params.x = dx;
+        params.y = dy-755;
+        win.setAttributes(params);
     }
 }
