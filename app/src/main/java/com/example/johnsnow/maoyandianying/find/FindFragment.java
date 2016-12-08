@@ -30,7 +30,7 @@ public class FindFragment extends BaseFragment {
     FindBean findBean;
     private Context mContext;
     private List<FindBean.DataBean.FeedsBean> findBeanList;
-    private MaterialRefreshLayout refresh;
+    private static MaterialRefreshLayout refresh;
     FindReAdapter adpter;
     private int item = 0;
     FloatingActionButton ftab;
@@ -86,12 +86,11 @@ public class FindFragment extends BaseFragment {
                     ftab.setVisibility(View.GONE);
                 }
 
-
-
                 if (isVisBottom(recyclerView)) {
                     item = item + 10;
                     Log.e("chenTag", "bottom");
                     getMoreDataFromServer(MyConstants.FIND_URL + item);
+                    refresh.finishRefresh();
                 }
             }
         });
@@ -129,7 +128,6 @@ public class FindFragment extends BaseFragment {
         public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
             getDataFromServer(MyConstants.FIND_URL + 0);
         }
-
         /**
          * 上拉刷新（加载更多）
          *
@@ -173,7 +171,6 @@ public class FindFragment extends BaseFragment {
 
             switch (id) {
                 case 100:
-                    refresh.finishRefresh();
                     if (response != null) {
                         processData(response);
                     }
@@ -198,6 +195,7 @@ public class FindFragment extends BaseFragment {
             switch (id) {
                 case 100:
                     if (response != null) {
+                        refresh.finishRefresh();
                         processData2(response);
                     }
                     break;
@@ -224,6 +222,7 @@ public class FindFragment extends BaseFragment {
         Gson gson = new Gson();
         FindBean findBean2 = gson.fromJson(response, FindBean.class);
         adpter.addAll(adpter.getItemCount(), findBean2.getData().getFeeds());
+        refresh.finishRefresh();
     }
 
 

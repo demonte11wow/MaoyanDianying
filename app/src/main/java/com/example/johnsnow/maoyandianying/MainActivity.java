@@ -102,16 +102,6 @@ public class MainActivity extends FragmentActivity implements BackHandledInterfa
         fragments = new ArrayList<>();
         filmFragment = new FilmFragment();
 
-//        Intent intent = getIntent();
-//        String currentCity = intent.getStringExtra("currentCity");
-//        bundle = new Bundle();
-//        bundle.putString("currentCity", currentCity);
-//        Log.e("chenTag", "resume");
-//
-//        if (null != currentCity && null != bundle && !bundle.isEmpty()){
-//            Log.e("chenTag", bundle.toString());
-//            filmFragment.setArguments(bundle);
-//        }
 
         fragments.add(filmFragment);
         fragments.add(new CinemaFragment());
@@ -171,7 +161,7 @@ public class MainActivity extends FragmentActivity implements BackHandledInterfa
                     if (fromFragment != null) {
                         transaction.hide(fromFragment);
                     }
-                    transaction.add(R.id.frameLayout, toFragment).commit();
+                    transaction.add(R.id.frameLayout, toFragment,toFragment.getClass().toString()).commit();
                 } else {
                     if (fromFragment != null) {
                         transaction.hide(fromFragment);
